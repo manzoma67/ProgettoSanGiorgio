@@ -1,0 +1,1887 @@
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parrocchia — Oriolo Romano</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                    },
+                    colors: {
+                        celestePage: '#DCEBFA',
+                        celesteLight: '#EAF3FA',
+                        celesteCard: '#F4F9FE',
+                        celesteDeep: '#BDD9F2',
+                        navy: '#0F2544',
+                        navyMid: '#1B3B6F',
+                        gold: '#C89D4C',
+                        goldBright: '#D4AF37',
+                        slateInk: '#1E2D42',
+                        slateMuted: '#4A607A',
+                    }
+                }
+            }
+        };
+    </script>
+
+    <style>
+        body {
+            background-image: url("SfondoNatalizio.png");
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #1E2D42;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .glass-header {
+            background: transparent;
+            border-bottom: 0;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
+
+        #hero-church {
+            position: relative;
+            overflow: hidden;
+        }
+
+        #hero-church img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center;
+            -webkit-mask-image:
+                linear-gradient(90deg, transparent 0%, black 11%, black 89%, transparent 100%),
+                linear-gradient(180deg, transparent 0%, black 7%, black 78%, transparent 100%);
+            mask-image:
+                linear-gradient(90deg, transparent 0%, black 11%, black 89%, transparent 100%),
+                linear-gradient(180deg, transparent 0%, black 7%, black 78%, transparent 100%);
+            -webkit-mask-composite: source-in;
+            mask-composite: intersect;
+        }
+
+        #mobile-nav-btn {
+            background: transparent;
+            border-color: transparent;
+            filter: drop-shadow(0 1px 5px rgba(255, 255, 255, 0.9)) drop-shadow(0 1px 3px rgba(15, 37, 68, 0.45));
+        }
+
+        #mobile-nav-panel {
+            background: transparent;
+            border: 0;
+            box-shadow: none;
+        }
+
+        #mobile-nav-panel a {
+            text-shadow: 0 1px 4px rgba(255, 255, 255, 0.9), 0 1px 10px rgba(15, 37, 68, 0.45);
+        }
+
+        #mobile-nav-panel a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        @media (max-width: 639px) {
+            #hero-church img {
+                -webkit-mask-image:
+                    linear-gradient(90deg, transparent 0%, black 14%, black 86%, transparent 100%),
+                    linear-gradient(180deg, transparent 0%, black 8%, black 72%, transparent 100%);
+                mask-image:
+                    linear-gradient(90deg, transparent 0%, black 14%, black 86%, transparent 100%),
+                    linear-gradient(180deg, transparent 0%, black 8%, black 72%, transparent 100%);
+            }
+        }
+
+        .holiday-message {
+            position: absolute;
+            z-index: 5;
+            left: 50%;
+            top: 43%;
+            width: max-content;
+            max-width: 92%;
+            transform: translateX(-50%);
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .holiday-message span {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: clamp(2rem, 6vw, 4.5rem);
+            font-style: italic;
+            font-weight: 700;
+            line-height: 1;
+            white-space: nowrap;
+            color: #F7FAFF;
+            background: linear-gradient(110deg, #F7FAFF 0%, #AEB9C7 20%, #FFFFFF 36%, #CAD3DF 48%, #FFFFFF 58%, #8795A6 72%, #F7FAFF 86%);
+            background-size: 220% 100%;
+            background-position: 100% center;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -webkit-text-stroke: 0.5px rgba(15, 37, 68, 0.45);
+            text-shadow: 0 2px 8px rgba(15, 37, 68, 0.8), 0 0 16px rgba(255, 255, 255, 0.8);
+            opacity: 0;
+        }
+
+        .holiday-message .message-one {
+            animation: holidayMessageOne 8s ease-in-out infinite, silverShimmer 3.2s ease-in-out infinite;
+        }
+
+        .holiday-message .message-two {
+            animation: holidayMessageTwo 8s ease-in-out infinite, silverShimmer 3.2s ease-in-out infinite;
+        }
+
+        @keyframes silverShimmer {
+            0%, 100% { background-position: 100% center; }
+            50% { background-position: -100% center; }
+        }
+
+        @keyframes holidayMessageOne {
+            0% { opacity: 0; transform: translate(-50%, -55px); }
+            10%, 42% { opacity: 1; transform: translate(-50%, 0); }
+            50%, 100% { opacity: 0; transform: translate(-50%, 20px); }
+        }
+
+        @keyframes holidayMessageTwo {
+            0%, 50% { opacity: 0; transform: translate(-50%, -55px); }
+            60%, 92% { opacity: 1; transform: translate(-50%, 0); }
+            100% { opacity: 0; transform: translate(-50%, 20px); }
+        }
+
+        .soft-panel {
+            background: rgba(244, 249, 254, 0.86);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .carousel-track {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .carousel-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .fade-soft {
+            animation: fadeSoft 0.3s ease-out both;
+        }
+        @keyframes fadeSoft {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-goldBright/30 selection:text-navy">
+
+    <!-- SCHERMATA DI BLOCCO: SITO IN COSTRUZIONE -->
+    <div id="site-lock-overlay" class="fixed inset-0 z-[100] hidden items-center justify-center bg-navy/95 backdrop-blur-md p-4">
+        <div class="bg-celesteLight border border-goldBright/50 rounded-3xl max-w-md w-full p-7 sm:p-8 shadow-2xl text-center space-y-5 fade-soft">
+            <div class="w-16 h-16 mx-auto rounded-full overflow-hidden border-2 border-goldBright bg-white shadow-sm">
+                <img src="san-giorgio.png" alt="San Giorgio" class="w-full h-full object-cover">
+            </div>
+
+            <div class="space-y-1.5">
+                <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-gold block">
+                    Parrocchia di Oriolo Romano
+                </span>
+                <h1 class="font-serif font-bold text-3xl text-navy">
+                    Sito in Costruzione
+                </h1>
+                <p class="text-xs sm:text-sm text-slateMuted leading-relaxed">
+                    L'accesso all'anteprima è riservato all'amministratore. Inserisci le tue credenziali Firebase per visualizzare la pagina.
+                </p>
+            </div>
+
+            <form onsubmit="handleSiteGateLogin(event)" class="space-y-3.5 text-left">
+                <div>
+                    <label for="gate-email-input" class="block text-xs font-bold uppercase tracking-wider text-navy mb-1">
+                        User ID / Email
+                    </label>
+                    <input
+                        id="gate-email-input"
+                        type="email"
+                        required
+                        autocomplete="username"
+                        placeholder="manzoma@gmail.com"
+                        class="w-full px-4 py-3 rounded-2xl bg-white border border-goldBright/40 text-sm text-navy focus:outline-none focus:border-navy"
+                    >
+                </div>
+
+                <div>
+                    <label for="gate-pwd-input" class="block text-xs font-bold uppercase tracking-wider text-navy mb-1">
+                        Password
+                    </label>
+                    <input
+                        id="gate-pwd-input"
+                        type="password"
+                        required
+                        autocomplete="current-password"
+                        placeholder="••••••••"
+                        class="w-full px-4 py-3 rounded-2xl bg-white border border-goldBright/40 text-sm text-navy focus:outline-none focus:border-navy"
+                    >
+                </div>
+
+                <p id="gate-login-error" class="hidden text-xs font-semibold text-red-700 text-center">
+                    Credenziali non valide o dominio non autorizzato su Firebase. Accesso negato.
+                </p>
+
+                <button
+                    type="submit"
+                    id="gate-submit-btn"
+                    class="w-full py-3 rounded-full text-sm font-semibold bg-navy text-goldBright hover:bg-navyMid transition-colors cursor-pointer shadow-sm"
+                >
+                    Accedi al Sito
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MENU FISSO IN ALTO -->
+    <header class="fixed top-0 inset-x-0 z-40 glass-header transition-all">
+        <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between py-1.5 gap-4">
+
+                <!-- Icona San Giorgio in alto a sinistra -->
+                <a href="#top" aria-label="Torna all'inizio" class="flex items-center gap-2.5 group focus:outline-none">
+                    <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-goldBright bg-celesteLight shadow-xs shrink-0">
+                        <img
+                            src="san-giorgio.png"
+                            alt="Icona di San Giorgio"
+                            class="w-full h-full object-cover"
+                        >
+                    </div>
+                </a>
+
+                <!-- Voci di menu richieste -->
+                <nav aria-label="Menu principale" class="hidden md:flex items-center gap-7 text-sm font-semibold text-navy">
+                    <a href="#top" class="relative py-1.5 text-navy hover:text-navyMid transition-colors group">
+                        <span class="group-hover:text-gold transition-colors">Home</span>
+                        <span class="block h-0.5 w-0 bg-goldBright group-hover:w-full transition-all duration-300 rounded-full"></span>
+                    </a>
+                    <a href="#celebrazioni" class="relative py-1.5 text-navy hover:text-navyMid transition-colors group">
+                        <span class="group-hover:text-gold transition-colors">Celebrazioni</span>
+                        <span class="block h-0.5 w-0 bg-goldBright group-hover:w-full transition-all duration-300 rounded-full"></span>
+                    </a>
+                    <a href="#comunicazioni" class="relative py-1.5 text-navy hover:text-navyMid transition-colors group">
+                        <span class="group-hover:text-gold transition-colors">Comunicazioni</span>
+                        <span class="block h-0.5 w-0 bg-goldBright group-hover:w-full transition-all duration-300 rounded-full"></span>
+                    </a>
+                    <a href="#comunita" class="relative py-1.5 text-navy hover:text-navyMid transition-colors group">
+                        <span class="group-hover:text-gold transition-colors">Comunità</span>
+                        <span class="block h-0.5 w-0 bg-goldBright group-hover:w-full transition-all duration-300 rounded-full"></span>
+                    </a>
+                    <a href="#storia" class="relative py-1.5 text-navy hover:text-navyMid transition-colors group">
+                        <span class="group-hover:text-gold transition-colors">Storia</span>
+                        <span class="block h-0.5 w-0 bg-goldBright group-hover:w-full transition-all duration-300 rounded-full"></span>
+                    </a>
+                    <a href="#contatti" class="relative py-1.5 text-navy hover:text-navyMid transition-colors group">
+                        <span class="group-hover:text-gold transition-colors">Contatti</span>
+                        <span class="block h-0.5 w-0 bg-goldBright group-hover:w-full transition-all duration-300 rounded-full"></span>
+                    </a>
+                </nav>
+
+                <!-- Pulsante menu mobile -->
+                <div class="flex items-center gap-2">
+                    <button
+                        type="button"
+                        id="mobile-nav-btn"
+                        onclick="toggleMobileNav()"
+                        aria-expanded="false"
+                        aria-controls="mobile-nav-panel"
+                        aria-label="Apri menu di navigazione"
+                        class="md:hidden p-2.5 rounded-full text-navy hover:bg-white/20 transition-colors cursor-pointer"
+                    >
+                        <i data-lucide="menu" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Menu mobile a comparsa -->
+            <div id="mobile-nav-panel" class="hidden md:hidden pb-4 pt-1 space-y-1 text-sm font-semibold text-navy">
+                <a href="#top" onclick="closeMobileNav()" class="flex items-center justify-between px-4 py-2.5 rounded-2xl transition-colors">
+                    <span>Home</span>
+                    <span class="w-2 h-2 rounded-full bg-goldBright"></span>
+                </a>
+                <a href="#celebrazioni" onclick="closeMobileNav()" class="flex items-center justify-between px-4 py-2.5 rounded-2xl transition-colors">
+                    <span>Celebrazioni</span>
+                    <span class="w-2 h-2 rounded-full bg-goldBright"></span>
+                </a>
+                <a href="#comunicazioni" onclick="closeMobileNav()" class="flex items-center justify-between px-4 py-2.5 rounded-2xl transition-colors">
+                    <span>Comunicazioni</span>
+                    <span class="w-2 h-2 rounded-full bg-goldBright"></span>
+                </a>
+                <a href="#comunita" onclick="closeMobileNav()" class="flex items-center justify-between px-4 py-2.5 rounded-2xl transition-colors">
+                    <span>Comunità</span>
+                    <span class="w-2 h-2 rounded-full bg-goldBright"></span>
+                </a>
+                <a href="#storia" onclick="closeMobileNav()" class="flex items-center justify-between px-4 py-2.5 rounded-2xl transition-colors">
+                    <span>Storia</span>
+                    <span class="w-2 h-2 rounded-full bg-goldBright"></span>
+                </a>
+                <a href="#contatti" onclick="closeMobileNav()" class="flex items-center justify-between px-4 py-2.5 rounded-2xl transition-colors">
+                    <span>Contatti</span>
+                    <span class="w-2 h-2 rounded-full bg-goldBright"></span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO CON CHIESA INTEGRATA NEL SFONDO NATALIZIO -->
+    <section id="top" aria-label="Chiesa di Oriolo Romano" class="pt-[72px]">
+        <div id="hero-church" class="relative w-full h-[290px] sm:h-[380px] lg:h-[440px]">
+            <img
+                src="chiesa-natale.webp"
+                alt="Chiesa di Oriolo Romano"
+                draggable="false"
+            >
+            <div class="holiday-message" aria-live="polite">
+                <span class="message-one">Buon Natale</span>
+                <span class="message-two">Pace e Gioia a Voi</span>
+            </div>
+        </div>
+
+        <!-- Presentazione essenziale e ariosa sotto l'immagine -->
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-14 text-center space-y-4">
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-gold">
+                Oriolo Romano
+            </p>
+            <h1 class="font-serif font-bold text-4xl sm:text-5xl text-navy leading-tight">
+                Benvenuti nella nostra Comunità Parrocchiale
+            </h1>
+            <p class="text-base sm:text-lg text-slateInk/85 max-w-2xl mx-auto leading-relaxed">
+                Un luogo aperto di preghiera, incontro e fraternità dove ritrovare gli orari delle celebrazioni, le comunicazioni della settimana e il cammino insieme.
+            </p>
+            <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+                <a href="#celebrazioni" class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-navy text-goldBright hover:bg-navyMid transition-colors shadow-xs">
+                    <i data-lucide="clock" class="w-4 h-4"></i>
+                    <span>Orari Celebrazioni</span>
+                </a>
+                <a href="#comunicazioni" class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-celesteCard text-navy border border-goldBright/40 hover:bg-white transition-colors">
+                    <i data-lucide="bell" class="w-4 h-4 text-gold"></i>
+                    <span>Comunicazioni &amp; Allegati</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 1. CELEBRAZIONI (MESSE E CONFESSIONI) -->
+    <section id="celebrazioni" aria-labelledby="celebrazioni-title" class="py-14 sm:py-20">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-[0.18em] text-gold block mb-1">
+                        Liturgia e Riconciliazione
+                    </span>
+                    <h2 id="celebrazioni-title" class="font-serif font-bold text-3xl sm:text-5xl text-navy">
+                        Celebrazioni
+                    </h2>
+                </div>
+
+                <div class="inline-flex items-center p-1.5 rounded-full bg-celesteCard border border-goldBright/35 shadow-2xs self-start md:self-auto" role="group" aria-label="Scegli regime orario">
+                    <button
+                        type="button"
+                        id="btn-season-winter"
+                        onclick="switchSeason('winter')"
+                        class="px-5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-navy text-goldBright transition-all cursor-pointer"
+                    >
+                        Orario Invernale
+                    </button>
+                    <button
+                        type="button"
+                        id="btn-season-summer"
+                        onclick="switchSeason('summer')"
+                        class="px-5 py-2 rounded-full text-xs sm:text-sm font-semibold text-navy hover:text-navyMid transition-all cursor-pointer"
+                    >
+                        Orario Estivo
+                    </button>
+                </div>
+            </div>
+
+            <div id="mass-cards-container" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+
+            <p id="season-footnote" class="text-center text-xs sm:text-sm text-slateMuted mt-7">
+                In vigore l’orario invernale.
+            </p>
+        </div>
+    </section>
+
+    <!-- 2. COMUNICAZIONI (AVVISI, BOLLETTINO PDF, AUDIO E VIDEO) -->
+    <section id="comunicazioni" aria-labelledby="comunicazioni-title" class="py-14 sm:py-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-[0.18em] text-gold block mb-1">
+                        Avvisi e Risorse Multimediali
+                    </span>
+                    <h2 id="comunicazioni-title" class="font-serif font-bold text-3xl sm:text-5xl text-navy">
+                        Comunicazioni
+                    </h2>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-2" role="group" aria-label="Filtra comunicazioni">
+                    <button type="button" data-filter="tutti" onclick="filterNotices('tutti')" class="filter-pill px-4 py-2 rounded-full text-xs font-semibold bg-navy text-goldBright transition-all cursor-pointer">
+                        Tutte
+                    </button>
+                    <button type="button" data-filter="liturgia" onclick="filterNotices('liturgia')" class="filter-pill px-4 py-2 rounded-full text-xs font-semibold bg-celesteCard text-navy border border-goldBright/30 hover:bg-white transition-all cursor-pointer">
+                        Liturgia
+                    </button>
+                    <button type="button" data-filter="caritas" onclick="filterNotices('caritas')" class="filter-pill px-4 py-2 rounded-full text-xs font-semibold bg-celesteCard text-navy border border-goldBright/30 hover:bg-white transition-all cursor-pointer">
+                        Caritas
+                    </button>
+                    <button type="button" data-filter="giovani" onclick="filterNotices('giovani')" class="filter-pill px-4 py-2 rounded-full text-xs font-semibold bg-celesteCard text-navy border border-goldBright/30 hover:bg-white transition-all cursor-pointer">
+                        Giovani
+                    </button>
+                    <button type="button" data-filter="famiglie" onclick="filterNotices('famiglie')" class="filter-pill px-4 py-2 rounded-full text-xs font-semibold bg-celesteCard text-navy border border-goldBright/30 hover:bg-white transition-all cursor-pointer">
+                        Famiglie
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+                <!-- Elenco Comunicazioni -->
+                <div id="notices-list" class="lg:col-span-7 space-y-4"></div>
+
+                <!-- Spazio Allegati Locali / Risorse Multimediali -->
+                <aside aria-label="Bollettino PDF, Audio e Video" class="lg:col-span-5 space-y-5">
+
+                    <!-- Bollettino PDF -->
+                    <div class="soft-panel rounded-3xl p-6 border border-goldBright/35 shadow-2xs space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-11 h-11 rounded-2xl bg-navy text-goldBright flex items-center justify-center shrink-0">
+                                <i data-lucide="file-text" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <span class="text-[11px] font-bold uppercase tracking-widest text-gold block">Documento PDF</span>
+                                <h3 class="font-serif font-bold text-2xl text-navy">Bollettino Settimanale</h3>
+                            </div>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slateInk/85 leading-relaxed">
+                            Foglio settimanale con avvisi, agenda e intenzioni della comunità. Puoi anche allegare link esterni (es. Google Drive) direttamente nelle comunicazioni.
+                        </p>
+                        <div class="rounded-2xl bg-celesteLight px-4 py-2.5 text-xs flex items-center justify-between gap-2">
+                            <span class="text-slateMuted">File attivo:</span>
+                            <span id="bulletin-filename-label" class="font-semibold text-navy truncate">Bollettino_Settimanale.pdf</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2.5">
+                            <button
+                                type="button"
+                                onclick="openBulletinModal()"
+                                class="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-full text-xs font-semibold bg-navy text-goldBright hover:bg-navyMid transition-colors cursor-pointer"
+                            >
+                                <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+                                <span>Anteprima</span>
+                            </button>
+                            <button
+                                type="button"
+                                id="btn-download-bulletin"
+                                onclick="triggerBulletinDownload()"
+                                class="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-full text-xs font-semibold bg-white text-navy border border-goldBright/35 hover:bg-celesteLight transition-colors cursor-pointer"
+                            >
+                                <i data-lucide="download" class="w-3.5 h-3.5 text-gold"></i>
+                                <span>Scarica PDF</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Audio Caricato -->
+                    <div class="soft-panel rounded-3xl p-6 border border-goldBright/35 shadow-2xs space-y-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-navy text-goldBright flex items-center justify-center shrink-0">
+                                <i data-lucide="volume-2" class="w-4 h-4"></i>
+                            </div>
+                            <div class="min-w-0">
+                                <span class="text-[11px] font-bold uppercase tracking-widest text-gold block">Ascolto Audio</span>
+                                <h3 id="audio-title-label" class="font-serif font-bold text-xl text-navy truncate">Meditazione / Avviso Audio</h3>
+                            </div>
+                        </div>
+                        <audio id="parish-audio-player" controls class="w-full rounded-xl">
+                            Il tuo browser non supporta la riproduzione audio.
+                        </audio>
+                        <p id="audio-empty-note" class="text-xs text-slateMuted">
+                            Nessun file audio caricato nella sessione corrente.
+                        </p>
+                    </div>
+
+                    <!-- Video Caricato -->
+                    <div class="soft-panel rounded-3xl p-6 border border-goldBright/35 shadow-2xs space-y-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-navy text-goldBright flex items-center justify-center shrink-0">
+                                <i data-lucide="video" class="w-4 h-4"></i>
+                            </div>
+                            <div class="min-w-0">
+                                <span class="text-[11px] font-bold uppercase tracking-widest text-gold block">Spazio Video</span>
+                                <h3 id="video-title-label" class="font-serif font-bold text-xl text-navy truncate">Video della Comunità</h3>
+                            </div>
+                        </div>
+                        <video id="parish-video-player" controls class="hidden w-full rounded-2xl bg-navy max-h-60">
+                            Il tuo browser non supporta la riproduzione video.
+                        </video>
+                        <p id="video-empty-note" class="text-xs text-slateMuted">
+                            Nessun file video caricato nella sessione corrente.
+                        </p>
+                    </div>
+
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. COMUNITÀ (CARITAS, GIOVANI, FAMIGLIE) -->
+    <section id="comunita" aria-labelledby="comunita-title" class="py-14 sm:py-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="max-w-2xl mx-auto text-center mb-10">
+                <span class="text-xs font-bold uppercase tracking-[0.18em] text-gold block mb-1">
+                    Camminare Insieme
+                </span>
+                <h2 id="comunita-title" class="font-serif font-bold text-3xl sm:text-5xl text-navy">
+                    Comunità
+                </h2>
+                <p class="text-sm sm:text-base text-slateMuted mt-2">
+                    Le realtà pastorali e di servizio che animano la vita parrocchiale ad Oriolo Romano.
+                </p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-3 mb-8" role="tablist" aria-label="Gruppi della comunità">
+                <button
+                    type="button"
+                    role="tab"
+                    id="tab-caritas"
+                    aria-selected="true"
+                    onclick="selectCommunityTab('caritas')"
+                    class="community-tab inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-navy text-goldBright transition-all cursor-pointer"
+                >
+                    <i data-lucide="heart-handshake" class="w-4 h-4"></i>
+                    <span>Caritas</span>
+                </button>
+                <button
+                    type="button"
+                    role="tab"
+                    id="tab-giovani"
+                    aria-selected="false"
+                    onclick="selectCommunityTab('giovani')"
+                    class="community-tab inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-celesteCard text-navy border border-goldBright/35 hover:bg-white transition-all cursor-pointer"
+                >
+                    <i data-lucide="sparkles" class="w-4 h-4 text-gold"></i>
+                    <span>Giovani</span>
+                </button>
+                <button
+                    type="button"
+                    role="tab"
+                    id="tab-famiglie"
+                    aria-selected="false"
+                    onclick="selectCommunityTab('famiglie')"
+                    class="community-tab inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-celesteCard text-navy border border-goldBright/35 hover:bg-white transition-all cursor-pointer"
+                >
+                    <i data-lucide="home" class="w-4 h-4 text-gold"></i>
+                    <span>Famiglie</span>
+                </button>
+            </div>
+
+            <div id="community-panel-container" class="max-w-4xl mx-auto soft-panel rounded-3xl p-7 sm:p-10 border border-goldBright/35 shadow-2xs fade-soft"></div>
+        </div>
+    </section>
+
+    <!-- 4. STORIA (IMMAGINI RIDOTTE IN FORME GEOMETRICHE CIRCOLARI) -->
+    <section id="storia" aria-labelledby="storia-title" class="py-14 sm:py-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+                <div class="space-y-3 max-w-2xl">
+                    <span class="text-xs font-bold uppercase tracking-[0.18em] text-gold block">
+                        Memoria e Tradizione
+                    </span>
+                    <h2 id="storia-title" class="font-serif font-bold text-3xl sm:text-5xl text-navy leading-tight">
+                        La Chiesa e la nostra storia
+                    </h2>
+                    <p class="text-sm sm:text-base text-slateInk/85 leading-relaxed">
+                        Un cammino di fede, arte e devozione custodito nel tempo dalla comunità di Oriolo Romano attorno al culto del Santo Patrono San Giorgio.
+                    </p>
+                </div>
+
+                <div class="flex items-center gap-2 self-start md:self-auto">
+                    <button
+                        type="button"
+                        onclick="scrollGallery(-1)"
+                        aria-label="Immagine precedente"
+                        class="w-10 h-10 rounded-full bg-celesteCard border border-goldBright/40 text-navy hover:bg-navy hover:text-goldBright flex items-center justify-center transition-colors cursor-pointer"
+                    >
+                        <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                    </button>
+                    <button
+                        type="button"
+                        onclick="scrollGallery(1)"
+                        aria-label="Immagine successiva"
+                        class="w-10 h-10 rounded-full bg-celesteCard border border-goldBright/40 text-navy hover:bg-navy hover:text-goldBright flex items-center justify-center transition-colors cursor-pointer"
+                    >
+                        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Carosello scorrevole con medaglioni circolari ridotti -->
+            <div
+                id="parish-carousel"
+                class="carousel-track flex items-start gap-8 sm:gap-10 overflow-x-auto snap-x snap-mandatory scroll-smooth py-4 px-2"
+                role="region"
+                aria-label="Galleria circolare scorrevole della storia parrocchiale"
+            >
+                <article class="snap-center shrink-0 w-44 sm:w-52 flex flex-col items-center text-center group">
+                    <div class="w-36 h-36 sm:w-44 sm:h-44 rounded-full overflow-hidden border-2 border-goldBright shadow-sm bg-celesteCard">
+                        <img
+                            src="san-giorgio.png"
+                            alt="San Giorgio Patrono"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        >
+                    </div>
+                    <h3 class="font-serif font-bold text-xl text-navy mt-3.5">San Giorgio Patrono</h3>
+                    <p class="text-xs text-slateMuted mt-1 leading-relaxed">
+                        Testimonianza di fede e protezione sulla nostra comunità.
+                    </p>
+                </article>
+
+                <article class="snap-center shrink-0 w-44 sm:w-52 flex flex-col items-center text-center group">
+                    <div class="w-36 h-36 sm:w-44 sm:h-44 rounded-full overflow-hidden border-2 border-goldBright shadow-sm bg-celesteCard">
+                        <img
+                            src="chiesa.png"
+                            alt="La Chiesa di Oriolo Romano"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        >
+                    </div>
+                    <h3 class="font-serif font-bold text-xl text-navy mt-3.5">La Chiesa del Borgo</h3>
+                    <p class="text-xs text-slateMuted mt-1 leading-relaxed">
+                        Cuore spirituale e storico affacciato su Oriolo Romano.
+                    </p>
+                </article>
+
+                <article class="snap-center shrink-0 w-44 sm:w-52 flex flex-col items-center text-center group">
+                    <div class="w-36 h-36 sm:w-44 sm:h-44 rounded-full overflow-hidden border-2 border-goldBright shadow-sm bg-celesteCard">
+                        <img
+                            src="PatronoFestaSGiorgio.jpeg"
+                            alt="Festa Patronale"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        >
+                    </div>
+                    <h3 class="font-serif font-bold text-xl text-navy mt-3.5">Festa Patronale</h3>
+                    <p class="text-xs text-slateMuted mt-1 leading-relaxed">
+                        Tradizione, preghiera condivisa e gioia per tutto il paese.
+                    </p>
+                </article>
+
+                <article class="snap-center shrink-0 w-44 sm:w-52 flex flex-col items-center text-center group">
+                    <div class="w-36 h-36 sm:w-44 sm:h-44 rounded-full overflow-hidden border-2 border-goldBright shadow-sm bg-celesteCard">
+                        <img
+                            src="Comunita.jpeg"
+                            alt="Comunità e Famiglie"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        >
+                    </div>
+                    <h3 class="font-serif font-bold text-xl text-navy mt-3.5">Generazioni in Cammino</h3>
+                    <p class="text-xs text-slateMuted mt-1 leading-relaxed">
+                        Famiglie, giovani e volontari uniti nel servizio quotidiano.
+                    </p>
+                </article>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 5. CONTATTI E FOOTER -->
+    <footer id="contatti" class="pt-14 pb-12 text-navy">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="max-w-2xl mx-auto text-center mb-10">
+                <span class="text-xs font-bold uppercase tracking-[0.18em] text-gold block mb-1">
+                    Restiamo in Contatto
+                </span>
+                <h2 class="font-serif font-bold text-3xl sm:text-5xl text-navy">
+                    Contatti
+                </h2>
+                <p class="text-sm sm:text-base text-slateInk/85 mt-2">
+                    Per colloqui con il parroco, sacramenti, segreteria o informazioni sulle attività parrocchiali.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pb-10">
+
+                <div class="soft-panel rounded-3xl p-6 border border-goldBright/35 space-y-2.5">
+                    <div class="w-10 h-10 rounded-full bg-navy text-goldBright flex items-center justify-center">
+                        <i data-lucide="map-pin" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-serif font-bold text-2xl text-navy">Dove Siamo</h3>
+                    <p class="text-sm text-slateInk/85 leading-relaxed">
+                        Piazza Umberto I<br>
+                        01010 Oriolo Romano (VT)
+                    </p>
+                    <a
+                        href="https://maps.google.com/?q=Piazza+Umberto+I,+Oriolo+Romano+VT"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center gap-1 text-xs font-bold text-gold hover:underline pt-1"
+                    >
+                        <span>Apri su Maps</span>
+                        <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+
+                <div class="soft-panel rounded-3xl p-6 border border-goldBright/35 space-y-2.5">
+                    <div class="w-10 h-10 rounded-full bg-navy text-goldBright flex items-center justify-center">
+                        <i data-lucide="phone" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-serif font-bold text-2xl text-navy">Parroco e Segreteria</h3>
+                    <p class="text-sm text-slateInk/90">
+                        <a href="tel:+390699830000" class="hover:text-gold font-medium">Tel. 06 9983 0000</a>
+                    </p>
+                    <p class="text-sm text-slateInk/90 break-all">
+                        <a href="mailto:parroco@parrocchiaorioloromano.it" class="hover:text-gold font-medium">
+                            parroco@parrocchiaorioloromano.it
+                        </a>
+                    </p>
+                </div>
+
+                <div class="soft-panel rounded-3xl p-6 border border-goldBright/35 space-y-3">
+                    <div class="w-10 h-10 rounded-full bg-navy text-goldBright flex items-center justify-center">
+                        <i data-lucide="share-2" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-serif font-bold text-2xl text-navy">WhatsApp e Social</h3>
+                    <div class="flex flex-wrap gap-3 pt-1">
+                        <a
+                            href="https://wa.me/393330000000"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="WhatsApp"
+                            title="WhatsApp"
+                            class="inline-flex w-11 h-11 items-center justify-center rounded-full bg-white text-navy border border-goldBright/35 hover:bg-[#25D366] hover:text-white hover:border-[#25D366] hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2 transition-all duration-200"
+                        >
+                            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" class="w-5 h-5">
+                                <path d="M20.5 11.7a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.5-4.9a8.4 8.4 0 1 1 16-3.9Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8.7 8.1c.2-.5.5-.5.8-.5h.5c.2 0 .4.1.5.4l.8 1.8c.1.2.1.4 0 .6l-.6.7c-.2.2-.2.4-.1.6.5.9 1.3 1.7 2.2 2.2.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.8.8c.3.1.4.3.4.5 0 .3-.1.8-.4 1.1-.4.4-1 .7-1.7.7-.8 0-1.8-.3-3.1-1.1-1.5-.9-2.6-2.3-3-3.1-.4-.8-.6-1.5-.6-2.1 0-.7.3-1.3.6-1.6Z" fill="currentColor"/>
+                            </svg>
+                        </a>
+                        <a
+                            href="https://www.facebook.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Facebook"
+                            title="Facebook"
+                            class="inline-flex w-11 h-11 items-center justify-center rounded-full bg-white text-navy border border-goldBright/35 hover:bg-[#1877F2] hover:text-white hover:border-[#1877F2] hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1877F2] focus-visible:ring-offset-2 transition-all duration-200"
+                        >
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="w-5 h-5">
+                                <path d="M13.5 21v-8.2h2.8l.4-3.2h-3.2V7.5c0-.9.3-1.6 1.6-1.6h1.7V3.1c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.3H7.3v3.2h2.8V21h3.4Z"/>
+                            </svg>
+                        </a>
+                        <a
+                            href="https://www.instagram.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Instagram"
+                            title="Instagram"
+                            class="inline-flex w-11 h-11 items-center justify-center rounded-full bg-white text-navy border border-goldBright/35 hover:bg-[#E4405F] hover:text-white hover:border-[#E4405F] hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E4405F] focus-visible:ring-offset-2 transition-all duration-200"
+                        >
+                            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" class="w-5 h-5">
+                                <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/>
+                                <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/>
+                                <circle cx="17.5" cy="6.8" r="1.1" fill="currentColor"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="pt-6 border-t border-goldBright/30 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slateMuted">
+                <p>© 2026 Oriolo Romano</p>
+                <button
+                    type="button"
+                    onclick="openAdminModal()"
+                    class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-celesteCard text-navy border border-goldBright/40 hover:bg-navy hover:text-goldBright font-semibold transition-colors cursor-pointer"
+                >
+                    <i data-lucide="lock" class="w-3.5 h-3.5 text-gold"></i>
+                    <span>Area Riservata / Admin</span>
+                </button>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- MODALE AREA AMMINISTRATIVA (AUTENTICAZIONE FIREBASE) -->
+    <div id="admin-modal" role="dialog" aria-modal="true" aria-labelledby="admin-dialog-title" class="fixed inset-0 z-50 hidden items-center justify-center bg-navy/65 backdrop-blur-xs p-4">
+        <div class="bg-celesteLight border border-goldBright/45 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl fade-soft">
+
+            <div class="flex items-start justify-between gap-4 pb-4 border-b border-goldBright/30">
+                <div>
+                    <span class="text-[11px] font-bold uppercase tracking-widest text-gold block">
+                        Gestione Parrocchiale — Cloud Firestore
+                    </span>
+                    <h3 id="admin-dialog-title" class="font-serif font-bold text-2xl sm:text-3xl text-navy mt-0.5">
+                        Area Amministrativa
+                    </h3>
+                </div>
+                <button type="button" onclick="closeAdminModal()" aria-label="Chiudi" class="p-2 rounded-full bg-white text-navy hover:bg-celesteDeep/50 cursor-pointer">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <!-- Login Admin via Firebase Authentication -->
+            <div id="admin-login-view" class="pt-5 space-y-4">
+                <div class="rounded-2xl bg-white/85 p-4 text-xs text-navy leading-relaxed border border-goldBright/30">
+                    Accedi con l'account amministratore configurato su <strong class="text-navyMid">Firebase Authentication</strong>.
+                </div>
+
+                <form onsubmit="handleAdminLogin(event)" class="space-y-3">
+                    <div>
+                        <label for="admin-email-input" class="block text-xs font-bold uppercase tracking-wider text-navy mb-1">
+                            User ID / Email
+                        </label>
+                        <input
+                            id="admin-email-input"
+                            type="email"
+                            required
+                            autocomplete="username"
+                            placeholder="manzoma@gmail.com"
+                            class="w-full px-4 py-3 rounded-2xl bg-white border border-goldBright/40 text-sm text-navy focus:outline-none focus:border-navy"
+                        >
+                    </div>
+                    <div>
+                        <label for="admin-pwd-input" class="block text-xs font-bold uppercase tracking-wider text-navy mb-1">
+                            Password
+                        </label>
+                        <input
+                            id="admin-pwd-input"
+                            type="password"
+                            required
+                            autocomplete="current-password"
+                            placeholder="Inserisci la password Firebase"
+                            class="w-full px-4 py-3 rounded-2xl bg-white border border-goldBright/40 text-sm text-navy focus:outline-none focus:border-navy"
+                        >
+                    </div>
+                    <p id="admin-login-error" class="hidden text-xs font-semibold text-red-700 mt-1">
+                        Credenziali non valide. Verifica l'utente su Firebase Authentication.
+                    </p>
+                    <div class="flex justify-end gap-2.5 pt-2">
+                        <button type="button" onclick="closeAdminModal()" class="px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold bg-white text-navy hover:bg-celesteDeep/40 cursor-pointer">
+                            Annulla
+                        </button>
+                        <button type="submit" class="px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold bg-navy text-goldBright hover:bg-navyMid transition-colors cursor-pointer">
+                            Accedi
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Dashboard Admin -->
+            <div id="admin-dashboard-view" class="hidden pt-5 space-y-5 max-h-[74vh] overflow-y-auto pr-1">
+
+                <div class="rounded-2xl bg-white/85 border border-goldBright/30 px-4 py-2.5 text-xs text-slateMuted flex flex-wrap items-center justify-between gap-2">
+                    <span>Utente connesso: <strong id="admin-active-user" class="text-navy">-</strong></span>
+                    <span class="text-gold font-semibold">Piano Spark: Firestore attivo (link esterni per PDF/Video)</span>
+                </div>
+
+                <!-- 1. Aggiorna Orari Messe e Celebrazioni (Firestore: orari/{winter|summer}) -->
+                <form onsubmit="handleSaveSchedule(event)" class="rounded-2xl bg-white/85 border border-goldBright/30 p-4 sm:p-5 space-y-3">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <h4 class="font-serif font-bold text-xl text-navy">Aggiorna Orari Messe e Celebrazioni</h4>
+                        <select id="admin-schedule-season" onchange="loadScheduleForm()" class="px-3 py-1.5 rounded-full bg-celesteLight border border-goldBright/40 text-xs font-semibold text-navy">
+                            <option value="winter">Orario Invernale</option>
+                            <option value="summer">Orario Estivo</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                        <div>
+                            <label class="block font-semibold text-navy mb-1">Messe Feriali</label>
+                            <input id="sched-feriali-1" type="text" class="w-full px-3 py-2 rounded-xl bg-celesteLight/60 border border-goldBright/30 text-navy mb-1.5">
+                            <input id="sched-feriali-2" type="text" class="w-full px-3 py-2 rounded-xl bg-celesteLight/60 border border-goldBright/30 text-navy">
+                        </div>
+                        <div>
+                            <label class="block font-semibold text-navy mb-1">Messe Festive</label>
+                            <input id="sched-festive-1" type="text" class="w-full px-3 py-2 rounded-xl bg-celesteLight/60 border border-goldBright/30 text-navy mb-1.5">
+                            <input id="sched-festive-2" type="text" class="w-full px-3 py-2 rounded-xl bg-celesteLight/60 border border-goldBright/30 text-navy">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                        <div>
+                            <label class="block font-semibold text-navy mb-1">Confessioni e Adorazione</label>
+                            <input id="sched-conf-1" type="text" class="w-full px-3 py-2 rounded-xl bg-celesteLight/60 border border-goldBright/30 text-navy mb-1.5">
+                            <input id="sched-conf-2" type="text" class="w-full px-3 py-2 rounded-xl bg-celesteLight/60 border border-goldBright/30 text-navy">
+                        </div>
+                        <div>
+                            <label class="block font-semibold text-navy mb-1">Nota Celebrazioni</label>
+                            <input id="sched-footnote" type="text" class="w-full px-3 py-2 rounded-xl bg-celesteLight/60 border border-goldBright/30 text-navy">
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end pt-1">
+                        <button type="submit" class="px-5 py-2 rounded-full text-xs font-semibold bg-navy text-goldBright hover:bg-navyMid transition-colors cursor-pointer">
+                            Salva Orari su Firestore
+                        </button>
+                    </div>
+                </form>
+
+                <!-- 2. Pubblica Nuova Comunicazione con Link Esterno (Firestore: comunicazioni) -->
+                <form onsubmit="handleAddNotice(event)" class="rounded-2xl bg-white/85 border border-goldBright/30 p-4 sm:p-5 space-y-3">
+                    <h4 class="font-serif font-bold text-xl text-navy">Nuova Comunicazione</h4>
+                    <input id="new-notice-title" type="text" required placeholder="Titolo della comunicazione" class="w-full px-3.5 py-2 rounded-xl bg-celesteLight/60 border border-goldBright/30 text-sm text-navy">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <select id="new-notice-category" class="w-full px-3.5 py-2 rounded-xl bg-celesteLight/60 border border-goldBright/30 text-sm text-navy">
+                            <option value="liturgia">Liturgia</option>
+                            <option value="caritas">Caritas</option>
+                            <option value="giovani">Giovani</option>
+                            <option value="famiglie">Famiglie</option>
+                        </select>
+                        <input id="new-notice-date" type="text" required placeholder="Data / Orario (es. Domenica 29 Nov)" class="w-full px-3.5 py-2 rounded-xl bg-celesteLight/60 border border-goldBright/30 text-sm text-navy">
+                    </div>
+                    <textarea id="new-notice-body" rows="2" required placeholder="Testo della comunicazione..." class="w-full px-3.5 py-2 rounded-xl bg-celesteLight/60 border border-goldBright/30 text-sm text-navy"></textarea>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <input id="new-notice-link-url" type="url" placeholder="Link esterno opzionale (PDF Drive / Video)" class="w-full px-3.5 py-2 rounded-xl bg-celesteLight/60 border border-goldBright/30 text-sm text-navy">
+                        <input id="new-notice-link-label" type="text" placeholder="Etichetta pulsante link (es. Apri PDF)" class="w-full px-3.5 py-2 rounded-xl bg-celesteLight/60 border border-goldBright/30 text-sm text-navy">
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="submit" class="px-5 py-2 rounded-full text-xs font-semibold bg-navy text-goldBright hover:bg-navyMid transition-colors cursor-pointer">
+                            Pubblica su Firestore
+                        </button>
+                    </div>
+                </form>
+
+                <!-- 3. Carica File Locali in Anteprima (PDF, Audio e Video) -->
+                <div class="rounded-2xl bg-white/85 border border-goldBright/30 p-4 sm:p-5 space-y-4">
+                    <h4 class="font-serif font-bold text-xl text-navy">Anteprima File Locali (PDF, Audio e Video)</h4>
+                    <p class="text-[11px] text-slateMuted">
+                        Poiché Firebase Storage non è attivato sul piano Spark, i file selezionati qui vengono riprodotti in anteprima locale nel browser, mentre per i link permanenti (es. PDF su Google Drive o video) puoi usare il campo link nella comunicazione.
+                    </p>
+
+                    <form onsubmit="handleUploadBulletin(event)" class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-3 border-b border-goldBright/20">
+                        <div class="text-xs">
+                            <span class="font-bold text-navy block">Bollettino PDF</span>
+                            <input id="bulletin-file-input" type="file" accept=".pdf,application/pdf" class="mt-1 block text-xs text-navy file:mr-3 file:py-1.5 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-navy file:text-goldBright cursor-pointer">
+                        </div>
+                        <button type="submit" class="px-4 py-2 rounded-full text-xs font-semibold bg-celesteLight text-navy border border-goldBright/40 hover:bg-celesteDeep/40 shrink-0 cursor-pointer">
+                            Aggiorna PDF
+                        </button>
+                    </form>
+
+                    <form onsubmit="handleUploadAudio(event)" class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-3 border-b border-goldBright/20">
+                        <div class="text-xs">
+                            <span class="font-bold text-navy block">File Audio (MP3, WAV, OGG, M4A)</span>
+                            <input id="audio-file-input" type="file" accept="audio/*" class="mt-1 block text-xs text-navy file:mr-3 file:py-1.5 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-navy file:text-goldBright cursor-pointer">
+                        </div>
+                        <button type="submit" class="px-4 py-2 rounded-full text-xs font-semibold bg-celesteLight text-navy border border-goldBright/40 hover:bg-celesteDeep/40 shrink-0 cursor-pointer">
+                            Carica Audio
+                        </button>
+                    </form>
+
+                    <form onsubmit="handleUploadVideo(event)" class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+                        <div class="text-xs">
+                            <span class="font-bold text-navy block">File Video (MP4, WEBM, MOV)</span>
+                            <input id="video-file-input" type="file" accept="video/*" class="mt-1 block text-xs text-navy file:mr-3 file:py-1.5 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-navy file:text-goldBright cursor-pointer">
+                        </div>
+                        <button type="submit" class="px-4 py-2 rounded-full text-xs font-semibold bg-celesteLight text-navy border border-goldBright/40 hover:bg-celesteDeep/40 shrink-0 cursor-pointer">
+                            Carica Video
+                        </button>
+                    </form>
+                </div>
+
+                <!-- 4. Elenco Comunicazioni Pubblicate -->
+                <div class="rounded-2xl bg-white/85 border border-goldBright/30 p-4 sm:p-5 space-y-2.5">
+                    <h4 class="font-serif font-bold text-xl text-navy">Comunicazioni Attive</h4>
+                    <div id="admin-notices-manage-list" class="space-y-2"></div>
+                </div>
+
+                <div class="flex items-center justify-between pt-2 border-t border-goldBright/30">
+                    <button type="button" onclick="handleAdminLogout()" class="text-xs font-semibold text-navyMid hover:underline cursor-pointer">
+                        Esci da Firebase
+                    </button>
+                    <button type="button" onclick="closeAdminModal()" class="px-5 py-2 rounded-full text-xs font-semibold bg-white text-navy border border-goldBright/35 cursor-pointer">
+                        Chiudi
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALE ANTEPRIMA BOLLETTINO PDF -->
+    <div id="bulletin-modal" role="dialog" aria-modal="true" aria-labelledby="bulletin-dialog-title" class="fixed inset-0 z-50 hidden items-center justify-center bg-navy/65 backdrop-blur-xs p-4">
+        <div class="bg-celesteLight border border-goldBright/45 rounded-3xl max-w-5xl w-full max-h-[95vh] flex flex-col p-5 sm:p-8 shadow-2xl fade-soft">
+            <div class="flex items-start justify-between gap-4 pb-4 border-b border-goldBright/30">
+                <div>
+                    <span class="text-[11px] font-bold uppercase tracking-widest text-gold block">
+                        Bollettino Settimanale
+                    </span>
+                    <h3 id="bulletin-dialog-title" class="font-serif font-bold text-2xl sm:text-3xl text-navy mt-0.5">
+                        Foglio della Comunità
+                    </h3>
+                </div>
+                <button type="button" onclick="closeBulletinModal()" aria-label="Chiudi" class="p-2 rounded-full bg-white text-navy hover:bg-celesteDeep/50 cursor-pointer">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <div class="py-5 space-y-4 text-sm text-slateInk/90 min-h-0 flex-1 overflow-y-auto leading-relaxed">
+                <div class="rounded-2xl bg-white/85 p-5 border border-goldBright/25">
+                    <h4 class="font-serif font-bold text-xl text-navy mb-1.5">Parola alla Comunità</h4>
+                    <p>
+                        Un saluto fraterno a tutte le famiglie di Oriolo Romano. In questa pagina puoi sempre consultare gli orari delle celebrazioni, gli avvisi e i link allegati dalla parrocchia.
+                    </p>
+                </div>
+                <div class="rounded-2xl bg-white/85 p-4 sm:p-5 border border-goldBright/25 space-y-3">
+                    <h4 class="font-serif font-bold text-xl text-navy">Anteprima comunicazione</h4>
+                    <p id="bulletin-preview-empty" class="text-slateMuted">
+                        Non è ancora stato caricato un bollettino PDF nella sessione corrente. Dopo il caricamento, il documento sarà visualizzato qui.
+                    </p>
+                    <button
+                        type="button"
+                        id="bulletin-preview-toggle"
+                        onclick="toggleBulletinPreview()"
+                        aria-expanded="false"
+                        aria-controls="bulletin-preview-frame"
+                        class="hidden px-4 py-2 rounded-full text-xs font-semibold bg-celesteLight text-navy border border-goldBright/40 hover:bg-celesteDeep/40 cursor-pointer"
+                    >
+                        <span id="bulletin-preview-toggle-label">Apri anteprima</span>
+                    </button>
+                    <iframe
+                        id="bulletin-preview-frame"
+                        title="Anteprima del bollettino settimanale"
+                        class="hidden w-full h-[55vh] min-h-[260px] rounded-xl bg-white border border-goldBright/20"
+                    ></iframe>
+                </div>
+            </div>
+
+            <div class="pt-4 border-t border-goldBright/30 flex flex-wrap justify-end gap-2.5">
+                <button type="button" onclick="closeBulletinModal()" class="px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold bg-white text-navy cursor-pointer">
+                    Chiudi
+                </button>
+                <button type="button" onclick="triggerBulletinDownload()" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold bg-navy text-goldBright hover:bg-navyMid transition-colors cursor-pointer">
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                    <span>Scarica PDF</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST DI CONFERMA -->
+    <div id="toast-banner" role="status" aria-live="polite" class="fixed bottom-5 right-5 z-50 hidden items-center gap-2.5 px-5 py-3 rounded-full bg-navy text-white text-xs sm:text-sm font-medium shadow-xl border border-goldBright/40 fade-soft">
+        <i data-lucide="check-circle" class="w-4 h-4 text-goldBright shrink-0"></i>
+        <span id="toast-message">Aggiornamento completato.</span>
+    </div>
+
+    <!-- LOGICA UI + COLLEGAMENTO FIREBASE AUTHENTICATION & FIRESTORE -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+        import {
+            getAuth,
+            onAuthStateChanged,
+            signInWithEmailAndPassword,
+            signOut
+        } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+        import {
+            getFirestore,
+            doc,
+            setDoc,
+            collection,
+            addDoc,
+            deleteDoc,
+            onSnapshot,
+            query,
+            orderBy,
+            serverTimestamp
+        } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+        // Imposta su true durante la costruzione per bloccare l'accesso finché non si fa il login Firebase.
+        // Imposta su false quando vuoi aprire il sito a tutti i visitatori.
+        const SITE_UNDER_CONSTRUCTION = true;
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDR3NVNmnMcucf21r5tKBmHh1VosAraZnI",
+            authDomain: "parrocchia-san-giorgio-oriolo.firebaseapp.com",
+            projectId: "parrocchia-san-giorgio-oriolo",
+            storageBucket: "parrocchia-san-giorgio-oriolo.firebasestorage.app",
+            messagingSenderId: "567422109026",
+            appId: "1:567422109026:web:9348d19fafd8d09f6f983b",
+            measurementId: "G-8W82ZDVXC"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        const CATEGORY_NAMES = {
+            liturgia: "Liturgia",
+            caritas: "Caritas",
+            giovani: "Giovani",
+            famiglie: "Famiglie"
+        };
+
+        const appState = {
+            firebaseUser: null,
+            noticeFilter: "tutti",
+            season: "winter",
+            activeCommunity: "caritas",
+            bulletinName: "Bollettino_Settimanale.pdf",
+            bulletinUrl: null,
+            audioUrl: null,
+            videoUrl: null,
+            notices: [],
+            schedules: {
+                winter: {
+                    footnote: "In vigore l’orario invernale.",
+                    cards: [
+                        {
+                            badge: "Lunedì – Venerdì",
+                            title: "Messe Feriali",
+                            times: ["Ore 08:30", "Ore 18:00"],
+                            note: "Celebrazioni feriali in chiesa parrocchiale."
+                        },
+                        {
+                            badge: "Sabato e Domenica",
+                            title: "Messe Festive",
+                            times: ["Sabato Prefestiva: Ore 18:30", "Domenica: 08:30 • 10:30 • 18:30"],
+                            note: "Celebrazioni festive domenicali."
+                        },
+                        {
+                            badge: "Confessioni e Adorazione",
+                            title: "Confessioni",
+                            times: ["Sabato: 16:30 – 18:15", "Adorazione: Giovedì 18:30 – 19:30"],
+                            note: "Disponibilità del parroco prima delle celebrazioni."
+                        }
+                    ]
+                },
+                summer: {
+                    footnote: "In vigore l’orario estivo.",
+                    cards: [
+                        {
+                            badge: "Lunedì – Venerdì",
+                            title: "Messe Feriali",
+                            times: ["Ore 08:30", "Ore 19:00"],
+                            note: "Celebrazione vespertina estiva."
+                        },
+                        {
+                            badge: "Sabato e Domenica",
+                            title: "Messe Festive",
+                            times: ["Sabato Prefestiva: Ore 19:00", "Domenica: 08:30 • 10:30 • 19:30"],
+                            note: "Celebrazioni festive estive."
+                        },
+                        {
+                            badge: "Confessioni e Adorazione",
+                            title: "Confessioni",
+                            times: ["Sabato: 17:00 – 18:45", "Adorazione: Giovedì 19:30 – 20:15"],
+                            note: "Disponibilità del parroco prima delle celebrazioni."
+                        }
+                    ]
+                }
+            },
+            community: {
+                caritas: {
+                    kicker: "Solidarietà e Ascolto",
+                    title: "Caritas Parrocchiale",
+                    description: "Servizio di prossimità, ascolto e aiuto concreto rivolto alle famiglie in difficoltà.",
+                    highlights: [
+                        { label: "Centro d’Ascolto", value: "Mercoledì dalle 09:30 alle 11:30" },
+                        { label: "Raccolta Viveri", value: "Prima domenica del mese" }
+                    ]
+                },
+                giovani: {
+                    kicker: "Crescita e Incontro",
+                    title: "Giovani",
+                    description: "Spazio di amicizia, confronto e cammino per i ragazzi e i giovani della parrocchia.",
+                    highlights: [
+                        { label: "Incontri", value: "Venerdì sera alle 18:30" },
+                        { label: "Attività", value: "Momenti comunitari e iniziative annuali" }
+                    ]
+                },
+                famiglie: {
+                    kicker: "Cammino Insieme",
+                    title: "Famiglie",
+                    description: "Percorsi di catechismo per i ragazzi e momenti di condivisione per i genitori.",
+                    highlights: [
+                        { label: "Catechismo", value: "Sabato mattina dalle 10:00" },
+                        { label: "Incontri Genitori", value: "Appuntamenti mensili in parrocchia" }
+                    ]
+                }
+            }
+        };
+
+        let unsubNotices = null;
+        let unsubWinter = null;
+        let unsubSummer = null;
+
+        function escapeHtml(str) {
+            return String(str || "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#39;");
+        }
+
+        function isSafeUrl(url) {
+            if (!url) return false;
+            try {
+                const parsed = new URL(url);
+                return parsed.protocol === "https:" || parsed.protocol === "http:";
+            } catch {
+                return false;
+            }
+        }
+
+        window.showNotification = function (msg) {
+            const toast = document.getElementById("toast-banner");
+            const text = document.getElementById("toast-message");
+            if (!toast || !text) return;
+            text.textContent = msg;
+            toast.classList.remove("hidden");
+            toast.classList.add("flex");
+            clearTimeout(window.showNotification._t);
+            window.showNotification._t = setTimeout(() => {
+                toast.classList.add("hidden");
+                toast.classList.remove("flex");
+            }, 3200);
+        };
+
+        function renderSchedules() {
+            const data = appState.schedules[appState.season];
+            const container = document.getElementById("mass-cards-container");
+            const footnote = document.getElementById("season-footnote");
+            if (footnote) footnote.textContent = data.footnote;
+
+            const winterBtn = document.getElementById("btn-season-winter");
+            const summerBtn = document.getElementById("btn-season-summer");
+            if (appState.season === "winter") {
+                winterBtn.className = "px-5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-navy text-goldBright transition-all cursor-pointer";
+                summerBtn.className = "px-5 py-2 rounded-full text-xs sm:text-sm font-semibold text-navy hover:text-navyMid transition-all cursor-pointer";
+            } else {
+                summerBtn.className = "px-5 py-2 rounded-full text-xs sm:text-sm font-semibold bg-navy text-goldBright transition-all cursor-pointer";
+                winterBtn.className = "px-5 py-2 rounded-full text-xs sm:text-sm font-semibold text-navy hover:text-navyMid transition-all cursor-pointer";
+            }
+
+            container.innerHTML = data.cards.map(card => `
+                <article class="soft-panel rounded-3xl p-7 border border-goldBright/35 shadow-2xs flex flex-col justify-between fade-soft">
+                    <div>
+                        <span class="inline-block px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-celesteLight text-navy border border-goldBright/30 mb-3.5">
+                            ${escapeHtml(card.badge)}
+                        </span>
+                        <h3 class="font-serif font-bold text-2xl text-navy mb-3">
+                            ${escapeHtml(card.title)}
+                        </h3>
+                        <ul class="space-y-2 mb-4">
+                            ${(card.times || []).map(t => `
+                                <li class="text-sm font-semibold text-navy flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-goldBright shrink-0"></span>
+                                    <span>${escapeHtml(t)}</span>
+                                </li>
+                            `).join("")}
+                        </ul>
+                    </div>
+                    <p class="text-xs text-slateMuted pt-3 border-t border-goldBright/25">
+                        ${escapeHtml(card.note)}
+                    </p>
+                </article>
+            `).join("");
+        }
+
+        function renderNotices() {
+            const listEl = document.getElementById("notices-list");
+            const filtered = appState.noticeFilter === "tutti"
+                ? appState.notices
+                : appState.notices.filter(n => n.category === appState.noticeFilter);
+
+            if (filtered.length === 0) {
+                listEl.innerHTML = `
+                    <div class="soft-panel rounded-3xl p-8 text-center text-sm text-slateMuted border border-goldBright/30">
+                        Nessuna comunicazione in questa categoria.
+                    </div>
+                `;
+                return;
+            }
+
+            listEl.innerHTML = filtered.map(item => {
+                const safeLink = isSafeUrl(item.linkUrl) ? item.linkUrl : "";
+                const linkButtonHtml = safeLink ? `
+                    <div class="mt-3">
+                        <a
+                            href="${escapeHtml(safeLink)}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold bg-navy text-goldBright hover:bg-navyMid transition-colors"
+                        >
+                            <span>${escapeHtml(item.linkLabel || "Apri link esterno")}</span>
+                            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                        </a>
+                    </div>
+                ` : "";
+
+                return `
+                    <article class="soft-panel rounded-3xl p-6 border border-goldBright/30 hover:border-goldBright/60 transition-colors fade-soft">
+                        <div class="flex flex-wrap items-center gap-2.5 mb-2">
+                            <span class="px-3 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider bg-celesteLight text-navy border border-goldBright/30">
+                                ${escapeHtml(CATEGORY_NAMES[item.category] || "Avviso")}
+                            </span>
+                            <span class="text-xs font-medium text-slateMuted">
+                                ${escapeHtml(item.date)}
+                            </span>
+                        </div>
+                        <h3 class="font-serif font-bold text-2xl text-navy">
+                            ${escapeHtml(item.title)}
+                        </h3>
+                        <p class="text-sm text-slateInk/85 mt-1.5 leading-relaxed whitespace-pre-line">
+                            ${escapeHtml(item.body)}
+                        </p>
+                        ${linkButtonHtml}
+                    </article>
+                `;
+            }).join("");
+
+            if (window.lucide && typeof window.lucide.createIcons === "function") {
+                window.lucide.createIcons();
+            }
+        }
+
+        function renderCommunityPanel() {
+            const panel = document.getElementById("community-panel-container");
+            const item = appState.community[appState.activeCommunity];
+            if (!panel || !item) return;
+
+            panel.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center fade-soft">
+                    <div class="md:col-span-7 space-y-2.5">
+                        <span class="text-xs font-bold uppercase tracking-widest text-gold block">
+                            ${escapeHtml(item.kicker)}
+                        </span>
+                        <h3 class="font-serif font-bold text-3xl text-navy">
+                            ${escapeHtml(item.title)}
+                        </h3>
+                        <p class="text-sm sm:text-base text-slateInk/85 leading-relaxed">
+                            ${escapeHtml(item.description)}
+                        </p>
+                    </div>
+                    <div class="md:col-span-5 space-y-3">
+                        ${item.highlights.map(h => `
+                            <div class="rounded-2xl bg-celesteLight/80 border border-goldBright/25 p-4">
+                                <span class="block text-[11px] font-bold uppercase tracking-wider text-gold">
+                                    ${escapeHtml(h.label)}
+                                </span>
+                                <span class="block text-xs sm:text-sm text-navy font-semibold mt-0.5">
+                                    ${escapeHtml(h.value)}
+                                </span>
+                            </div>
+                        `).join("")}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderAdminManageList() {
+            const list = document.getElementById("admin-notices-manage-list");
+            if (!list) return;
+            if (appState.notices.length === 0) {
+                list.innerHTML = '<p class="text-xs text-slateMuted">Nessuna comunicazione salvata su Firestore.</p>';
+                return;
+            }
+            list.innerHTML = appState.notices.map(n => `
+                <div class="flex items-center justify-between gap-3 rounded-xl bg-celesteLight/70 px-3.5 py-2.5 text-xs border border-goldBright/25">
+                    <div class="min-w-0">
+                        <p class="font-semibold text-navy truncate">${escapeHtml(n.title)}</p>
+                        <p class="text-slateMuted truncate">${escapeHtml(n.date)}${n.linkUrl ? " • Link allegato" : ""}</p>
+                    </div>
+                    <button
+                        type="button"
+                        onclick="deleteNotice('${escapeHtml(n.id)}')"
+                        class="px-3 py-1 rounded-full bg-red-50 text-red-700 font-semibold hover:bg-red-100 shrink-0 cursor-pointer"
+                    >
+                        Elimina
+                    </button>
+                </div>
+            `).join("");
+        }
+
+        function startFirestoreListeners() {
+            if (unsubNotices) unsubNotices();
+            if (unsubWinter) unsubWinter();
+            if (unsubSummer) unsubSummer();
+
+            const q = query(collection(db, "comunicazioni"), orderBy("createdAt", "desc"));
+            unsubNotices = onSnapshot(q, (snap) => {
+                appState.notices = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+                renderNotices();
+                renderAdminManageList();
+            }, (err) => {
+                console.error("Errore lettura comunicazioni Firestore:", err);
+            });
+
+            unsubWinter = onSnapshot(doc(db, "orari", "winter"), (snap) => {
+                if (snap.exists()) {
+                    const data = snap.data();
+                    appState.schedules.winter = {
+                        footnote: data.footnote || appState.schedules.winter.footnote,
+                        cards: Array.isArray(data.cards) && data.cards.length === 3 ? data.cards : appState.schedules.winter.cards
+                    };
+                    renderSchedules();
+                    if (appState.firebaseUser && document.getElementById("admin-schedule-season")?.value === "winter") {
+                        window.loadScheduleForm();
+                    }
+                }
+            }, (err) => {
+                console.error("Errore lettura orario invernale:", err);
+            });
+
+            unsubSummer = onSnapshot(doc(db, "orari", "summer"), (snap) => {
+                if (snap.exists()) {
+                    const data = snap.data();
+                    appState.schedules.summer = {
+                        footnote: data.footnote || appState.schedules.summer.footnote,
+                        cards: Array.isArray(data.cards) && data.cards.length === 3 ? data.cards : appState.schedules.summer.cards
+                    };
+                    renderSchedules();
+                    if (appState.firebaseUser && document.getElementById("admin-schedule-season")?.value === "summer") {
+                        window.loadScheduleForm();
+                    }
+                }
+            }, (err) => {
+                console.error("Errore lettura orario estivo:", err);
+            });
+        }
+
+        function stopFirestoreListeners() {
+            if (unsubNotices) { unsubNotices(); unsubNotices = null; }
+            if (unsubWinter) { unsubWinter(); unsubWinter = null; }
+            if (unsubSummer) { unsubSummer(); unsubSummer = null; }
+        }
+
+        function updateLockAndAdminState(user) {
+            appState.firebaseUser = user;
+            const lockEl = document.getElementById("site-lock-overlay");
+            const activeUserLabel = document.getElementById("admin-active-user");
+
+            if (activeUserLabel) {
+                activeUserLabel.textContent = user ? (user.email || user.uid) : "-";
+            }
+
+            if (user) {
+                if (lockEl) {
+                    lockEl.classList.add("hidden");
+                    lockEl.classList.remove("flex");
+                }
+                startFirestoreListeners();
+            } else {
+                stopFirestoreListeners();
+                if (SITE_UNDER_CONSTRUCTION && lockEl) {
+                    lockEl.classList.remove("hidden");
+                    lockEl.classList.add("flex");
+                } else if (lockEl) {
+                    lockEl.classList.add("hidden");
+                    lockEl.classList.remove("flex");
+                }
+            }
+
+            syncAdminViews();
+        }
+
+        window.handleSiteGateLogin = async function (event) {
+            event.preventDefault();
+            const emailInput = document.getElementById("gate-email-input");
+            const pwdInput = document.getElementById("gate-pwd-input");
+            const errEl = document.getElementById("gate-login-error");
+            const submitBtn = document.getElementById("gate-submit-btn");
+
+            errEl.classList.add("hidden");
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Verifica in corso...";
+
+            try {
+                await signInWithEmailAndPassword(auth, emailInput.value.trim(), pwdInput.value);
+                pwdInput.value = "";
+                window.showNotification("Accesso sbloccato.");
+            } catch (err) {
+                console.error(err);
+                errEl.classList.remove("hidden");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Accedi al Sito";
+            }
+        };
+
+        window.loadScheduleForm = function () {
+            const sel = document.getElementById("admin-schedule-season");
+            const key = sel ? sel.value : appState.season;
+            const d = appState.schedules[key];
+            document.getElementById("sched-feriali-1").value = d.cards[0]?.times?.[0] || "";
+            document.getElementById("sched-feriali-2").value = d.cards[0]?.times?.[1] || "";
+            document.getElementById("sched-festive-1").value = d.cards[1]?.times?.[0] || "";
+            document.getElementById("sched-festive-2").value = d.cards[1]?.times?.[1] || "";
+            document.getElementById("sched-conf-1").value = d.cards[2]?.times?.[0] || "";
+            document.getElementById("sched-conf-2").value = d.cards[2]?.times?.[1] || "";
+            document.getElementById("sched-footnote").value = d.footnote || "";
+        };
+
+        window.handleSaveSchedule = async function (event) {
+            event.preventDefault();
+            if (!appState.firebaseUser) {
+                window.showNotification("Accedi prima con il tuo account Firebase.");
+                return;
+            }
+
+            const key = document.getElementById("admin-schedule-season").value;
+            const currentSeasonData = appState.schedules[key];
+
+            const f1 = document.getElementById("sched-feriali-1").value.trim();
+            const f2 = document.getElementById("sched-feriali-2").value.trim();
+            const fe1 = document.getElementById("sched-festive-1").value.trim();
+            const fe2 = document.getElementById("sched-festive-2").value.trim();
+            const c1 = document.getElementById("sched-conf-1").value.trim();
+            const c2 = document.getElementById("sched-conf-2").value.trim();
+            const fn = document.getElementById("sched-footnote").value.trim() || currentSeasonData.footnote;
+
+            const updatedCards = [
+                { ...currentSeasonData.cards[0], times: [f1, f2].filter(Boolean) },
+                { ...currentSeasonData.cards[1], times: [fe1, fe2].filter(Boolean) },
+                { ...currentSeasonData.cards[2], times: [c1, c2].filter(Boolean) }
+            ];
+
+            try {
+                await setDoc(doc(db, "orari", key), {
+                    footnote: fn,
+                    cards: updatedCards,
+                    updatedAt: serverTimestamp()
+                }, { merge: true });
+
+                appState.season = key;
+                renderSchedules();
+                window.showNotification("Orari salvati su Firestore.");
+            } catch (err) {
+                console.error(err);
+                window.showNotification("Errore nel salvataggio degli orari.");
+            }
+        };
+
+        window.switchSeason = function (season) {
+            appState.season = season === "summer" ? "summer" : "winter";
+            renderSchedules();
+        };
+
+        window.filterNotices = function (category) {
+            appState.noticeFilter = category;
+            document.querySelectorAll(".filter-pill").forEach(btn => {
+                const isActive = btn.dataset.filter === category;
+                btn.className = isActive
+                    ? "filter-pill px-4 py-2 rounded-full text-xs font-semibold bg-navy text-goldBright transition-all cursor-pointer"
+                    : "filter-pill px-4 py-2 rounded-full text-xs font-semibold bg-celesteCard text-navy border border-goldBright/30 hover:bg-white transition-all cursor-pointer";
+            });
+            renderNotices();
+        };
+
+        window.selectCommunityTab = function (key) {
+            appState.activeCommunity = key;
+            document.querySelectorAll(".community-tab").forEach(tab => {
+                const selected = tab.id === "tab-" + key;
+                tab.setAttribute("aria-selected", String(selected));
+                tab.className = selected
+                    ? "community-tab inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-navy text-goldBright transition-all cursor-pointer"
+                    : "community-tab inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-celesteCard text-navy border border-goldBright/35 hover:bg-white transition-all cursor-pointer";
+            });
+            renderCommunityPanel();
+        };
+
+        window.scrollGallery = function (direction) {
+            const track = document.getElementById("parish-carousel");
+            if (!track) return;
+            track.scrollBy({ left: direction * 240, behavior: "smooth" });
+        };
+
+        window.toggleMobileNav = function () {
+            const panel = document.getElementById("mobile-nav-panel");
+            const btn = document.getElementById("mobile-nav-btn");
+            if (!panel || !btn) return;
+            const open = panel.classList.contains("hidden");
+            panel.classList.toggle("hidden", !open);
+            btn.setAttribute("aria-expanded", String(open));
+        };
+
+        window.closeMobileNav = function () {
+            const panel = document.getElementById("mobile-nav-panel");
+            const btn = document.getElementById("mobile-nav-btn");
+            if (panel) panel.classList.add("hidden");
+            if (btn) btn.setAttribute("aria-expanded", "false");
+        };
+
+        function syncBulletinPreview() {
+            const frame = document.getElementById("bulletin-preview-frame");
+            const emptyNote = document.getElementById("bulletin-preview-empty");
+            const toggle = document.getElementById("bulletin-preview-toggle");
+            const toggleLabel = document.getElementById("bulletin-preview-toggle-label");
+            if (!frame || !emptyNote || !toggle || !toggleLabel) return;
+
+            if (appState.bulletinUrl) {
+                frame.src = appState.bulletinUrl;
+                frame.classList.add("hidden");
+                emptyNote.classList.add("hidden");
+                toggle.classList.remove("hidden");
+                toggle.setAttribute("aria-expanded", "false");
+                toggleLabel.textContent = "Apri anteprima";
+            } else {
+                frame.removeAttribute("src");
+                frame.classList.add("hidden");
+                emptyNote.classList.remove("hidden");
+                toggle.classList.add("hidden");
+                toggle.setAttribute("aria-expanded", "false");
+            }
+        }
+
+        window.toggleBulletinPreview = function () {
+            const frame = document.getElementById("bulletin-preview-frame");
+            const toggle = document.getElementById("bulletin-preview-toggle");
+            const toggleLabel = document.getElementById("bulletin-preview-toggle-label");
+            if (!frame || !toggle || !toggleLabel || !appState.bulletinUrl) return;
+
+            const open = frame.classList.contains("hidden");
+            frame.classList.toggle("hidden", !open);
+            toggle.setAttribute("aria-expanded", String(open));
+            toggleLabel.textContent = open ? "Chiudi anteprima" : "Apri anteprima";
+        };
+
+        window.openBulletinModal = function () {
+            const modal = document.getElementById("bulletin-modal");
+            if (!modal) return;
+            syncBulletinPreview();
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+        };
+
+        window.closeBulletinModal = function () {
+            const modal = document.getElementById("bulletin-modal");
+            if (!modal) return;
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+        };
+
+        window.triggerBulletinDownload = function () {
+            if (appState.bulletinUrl) {
+                const a = document.createElement("a");
+                a.href = appState.bulletinUrl;
+                a.download = appState.bulletinName;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                window.showNotification("Scaricamento avviato: " + appState.bulletinName);
+            } else {
+                window.showNotification("Bollettino selezionato: " + appState.bulletinName);
+            }
+        };
+
+        window.openAdminModal = function () {
+            const modal = document.getElementById("admin-modal");
+            if (!modal) return;
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+            syncAdminViews();
+        };
+
+        window.closeAdminModal = function () {
+            const modal = document.getElementById("admin-modal");
+            if (!modal) return;
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+        };
+
+        function syncAdminViews() {
+            const loginView = document.getElementById("admin-login-view");
+            const dashView = document.getElementById("admin-dashboard-view");
+            if (!loginView || !dashView) return;
+
+            if (appState.firebaseUser) {
+                loginView.classList.add("hidden");
+                dashView.classList.remove("hidden");
+                document.getElementById("admin-schedule-season").value = appState.season;
+                window.loadScheduleForm();
+                renderAdminManageList();
+            } else {
+                loginView.classList.remove("hidden");
+                dashView.classList.add("hidden");
+            }
+        }
+
+        window.handleAdminLogin = async function (event) {
+            event.preventDefault();
+            const emailInput = document.getElementById("admin-email-input");
+            const pwdInput = document.getElementById("admin-pwd-input");
+            const err = document.getElementById("admin-login-error");
+            if (!emailInput || !pwdInput) return;
+
+            err.classList.add("hidden");
+            try {
+                await signInWithEmailAndPassword(auth, emailInput.value.trim(), pwdInput.value);
+                pwdInput.value = "";
+                syncAdminViews();
+                window.showNotification("Accesso amministratore effettuato.");
+            } catch (e) {
+                console.error(e);
+                err.classList.remove("hidden");
+            }
+        };
+
+        window.handleAdminLogout = async function () {
+            try {
+                await signOut(auth);
+                window.showNotification("Sessione chiusa.");
+            } catch (e) {
+                console.error(e);
+            }
+        };
+
+        window.handleAddNotice = async function (event) {
+            event.preventDefault();
+            if (!appState.firebaseUser) {
+                window.showNotification("Accedi prima con il tuo account Firebase.");
+                return;
+            }
+
+            const title = document.getElementById("new-notice-title").value.trim();
+            const category = document.getElementById("new-notice-category").value;
+            const date = document.getElementById("new-notice-date").value.trim();
+            const body = document.getElementById("new-notice-body").value.trim();
+            const linkUrl = document.getElementById("new-notice-link-url").value.trim();
+            const linkLabel = document.getElementById("new-notice-link-label").value.trim();
+
+            if (!title || !date || !body) return;
+            if (linkUrl && !isSafeUrl(linkUrl)) {
+                window.showNotification("Inserisci un link valido che inizi con https:// o http://");
+                return;
+            }
+
+            try {
+                await addDoc(collection(db, "comunicazioni"), {
+                    title,
+                    category,
+                    date,
+                    body,
+                    linkUrl: linkUrl || "",
+                    linkLabel: linkLabel || "",
+                    createdAt: serverTimestamp(),
+                    authorEmail: appState.firebaseUser.email || ""
+                });
+
+                window.filterNotices("tutti");
+                event.target.reset();
+                window.showNotification("Comunicazione pubblicata su Firestore.");
+            } catch (err) {
+                console.error(err);
+                window.showNotification("Errore durante la pubblicazione.");
+            }
+        };
+
+        window.deleteNotice = async function (id) {
+            if (!appState.firebaseUser) {
+                window.showNotification("Accedi prima con il tuo account Firebase.");
+                return;
+            }
+            try {
+                await deleteDoc(doc(db, "comunicazioni", id));
+                window.showNotification("Comunicazione eliminata da Firestore.");
+            } catch (err) {
+                console.error(err);
+                window.showNotification("Errore durante l'eliminazione.");
+            }
+        };
+
+        window.handleUploadBulletin = function (event) {
+            event.preventDefault();
+            const input = document.getElementById("bulletin-file-input");
+            const file = input && input.files && input.files[0];
+            if (!file) {
+                window.showNotification("Seleziona un file PDF.");
+                return;
+            }
+            if (appState.bulletinUrl) URL.revokeObjectURL(appState.bulletinUrl);
+            appState.bulletinUrl = URL.createObjectURL(file);
+            appState.bulletinName = file.name;
+            document.getElementById("bulletin-filename-label").textContent = file.name;
+            const modal = document.getElementById("bulletin-modal");
+            if (modal && !modal.classList.contains("hidden")) syncBulletinPreview();
+            input.value = "";
+            window.showNotification("PDF caricato in anteprima: " + file.name);
+        };
+
+        window.handleUploadAudio = function (event) {
+            event.preventDefault();
+            const input = document.getElementById("audio-file-input");
+            const file = input && input.files && input.files[0];
+            if (!file) {
+                window.showNotification("Seleziona un file audio.");
+                return;
+            }
+            if (appState.audioUrl) URL.revokeObjectURL(appState.audioUrl);
+            appState.audioUrl = URL.createObjectURL(file);
+            const player = document.getElementById("parish-audio-player");
+            player.src = appState.audioUrl;
+            player.load();
+            document.getElementById("audio-title-label").textContent = file.name;
+            document.getElementById("audio-empty-note").textContent = "File caricato: " + file.name;
+            input.value = "";
+            window.showNotification("Audio caricato: " + file.name);
+        };
+
+        window.handleUploadVideo = function (event) {
+            event.preventDefault();
+            const input = document.getElementById("video-file-input");
+            const file = input && input.files && input.files[0];
+            if (!file) {
+                window.showNotification("Seleziona un file video.");
+                return;
+            }
+            if (appState.videoUrl) URL.revokeObjectURL(appState.videoUrl);
+            appState.videoUrl = URL.createObjectURL(file);
+            const player = document.getElementById("parish-video-player");
+            player.src = appState.videoUrl;
+            player.classList.remove("hidden");
+            player.load();
+            document.getElementById("video-title-label").textContent = file.name;
+            document.getElementById("video-empty-note").textContent = "File caricato: " + file.name;
+            input.value = "";
+            window.showNotification("Video caricato: " + file.name);
+        };
+
+        document.addEventListener("DOMContentLoaded", function () {
+            renderSchedules();
+            renderNotices();
+            renderCommunityPanel();
+
+            onAuthStateChanged(auth, (user) => {
+                updateLockAndAdminState(user);
+            });
+
+            if (window.lucide && typeof window.lucide.createIcons === "function") {
+                window.lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+</html>
